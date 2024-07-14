@@ -24,15 +24,18 @@ speaker_positions = {
     "rear_right": np.array([1.5, car_width, 0.5])
 }
 
+
 # Function to calculate distance between two points in 3D space
 def calculate_distance(point1, point2):
     return np.linalg.norm(point1 - point2)
+
 
 # Calculate sound pressure level at each passenger position
 def calculate_spl_at_position(source_pos, target_pos, signal):
     distance = calculate_distance(source_pos, target_pos)
     attenuation = 1 / (distance ** 2)  # Simplified inverse-square law
     return signal * attenuation
+
 
 # Function to plot the car interior with positions
 def plot_car_interior(engine_pos, passenger_positions, speaker_positions, car_length, car_width, car_height):
@@ -85,17 +88,19 @@ def plot_car_interior(engine_pos, passenger_positions, speaker_positions, car_le
 
     return ax
 
+
 # Function to plot sine waves from engine to each passenger
-def plot_sine_waves(ax, engine_pos, passenger_positions, noise_freq, speed_of_sound=343.0):
-    num_points = 100
+def plot_sine_waves(ax, engine_pos, passenger_positions, noise_freq, speed_of_sound=343.0, point_spacing=0.01):
     for passenger, pos in passenger_positions.items():
         distance = calculate_distance(engine_pos, pos)
-        num_periods = int(distance / (speed_of_sound / noise_freq))  # Number of periods based on distance
+        num_points = int(distance / point_spacing)  # Calculate number of points based on distance
+        t = np.linspace(0, distance / speed_of_sound, num_points, endpoint=False)
         x_vals = np.linspace(engine_pos[0], pos[0], num_points)
         y_vals = np.linspace(engine_pos[1], pos[1], num_points)
         z_vals = np.linspace(engine_pos[2], pos[2], num_points)
-        wave = 0.1 * np.sin(2 * np.pi * noise_freq * t[:num_points] * num_periods)  # Adjusted number of periods
+        wave = 0.1 * np.sin(2 * np.pi * noise_freq * t)  # Adjusted sine wave based on distance
         ax.plot3D(x_vals, y_vals, z_vals + wave, label=f'{passenger} wave')
+
 
 # Main execution
 if __name__ == "__main__":
