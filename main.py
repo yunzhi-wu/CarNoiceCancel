@@ -8,20 +8,20 @@ car_width = 1.8  # meters
 car_height = 1.5  # meters
 
 # Positions (x, y, z) of engine and passengers
-engine_pos = np.array([0.5, 0.9, 0.5])  # Front of the car
+engine_pos = np.array([0.5, car_width / 2, 0.5])  # Front of the car
 passenger_positions = {
-    "driver": np.array([3.0, 0.5, 1.0]),
-    "front_passenger": np.array([3.0, 1.3, 1.0]),
-    "rear_left": np.array([1.5, 0.5, 1.0]),
-    "rear_right": np.array([1.5, 1.3, 1.0])
+    "driver": np.array([1.5, 0.5, 1.0]),
+    "front_passenger": np.array([1.5, 1.3, 1.0]),
+    "rear_left": np.array([3.0, 0.5, 1.0]),
+    "rear_right": np.array([3.0, 1.3, 1.0])
 }
 
-# Positions of speakers (assumed to be embedded in doors)
+# Positions of speakers (assumed to be embedded in doors at height 0.5m)
 speaker_positions = {
-    "front_left": np.array([3.0, 0.0, 1.0]),
-    "front_right": np.array([3.0, 1.8, 1.0]),
-    "rear_left": np.array([1.5, 0.0, 1.0]),
-    "rear_right": np.array([1.5, 1.8, 1.0])
+    "front_left": np.array([3.0, 0.0, 0.5]),
+    "front_right": np.array([3.0, car_width, 0.5]),
+    "rear_left": np.array([1.5, 0.0, 0.5]),
+    "rear_right": np.array([1.5, car_width, 0.5])
 }
 
 # Function to calculate distance between two points in 3D space
