@@ -85,6 +85,10 @@ ax.set_xlabel('Length (m)')
 ax.set_ylabel('Width (m)')
 ax.set_zlabel('Height (m)')
 ax.legend()
+
+# Set aspect ratio to ensure rectangular box
+ax.set_box_aspect([car_length, car_width, car_height])  # Aspect ratio is 1:1:1 in data space
+
 plt.show()
 
 # Calculate and print SPL at each passenger position
